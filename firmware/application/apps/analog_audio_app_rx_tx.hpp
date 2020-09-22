@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __ANALOG_AUDIO_APP_H__
-#define __ANALOG_AUDIO_APP_H__
+#ifndef __ANALOG_AUDIO_RXTX_APP_H__
+#define __ANALOG_AUDIO_RXTX_APP_H__
 
 #include "receiver_model.hpp"
 
@@ -61,6 +61,11 @@ private:
 			{ "CW  ", 0 },
 		}
 	};
+    
+    
+    bool transmitting { false };
+    bool rx_enabled { false };
+    
 };
 
 class NBFMOptionsView : public View {
@@ -259,4 +264,4 @@ private:
 
 } /* namespace ui */
 
-#endif/*__ANALOG_AUDIO_APP_H__*/
+#endif/*__ANALOG_AUDIO_RXTX_APP_H__*/
