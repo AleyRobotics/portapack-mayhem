@@ -37,6 +37,7 @@
 #include "ui_epar.hpp"
 #include "ui_lcr.hpp"
 #include "analog_audio_app.hpp"
+#include "analog_audio_app_rx_tx.hpp"
 #include "ui_soundboard.hpp"
 #include "ui_debug.hpp"
 #include "ui_closecall.hpp"
@@ -165,6 +166,7 @@ LoadModuleView::LoadModuleView(
 			if (viewid == LCR) nav.push<LCRView>();
 			if (viewid == SoundBoard) nav.push<SoundBoardView>();
 			if (viewid == AnalogAudio) nav.push<AnalogAudioView>();
+            if (viewid == AnalogAudioRXTX) nav.push<AnalogRXTXAudioView>();
 			if (viewid == RDS) nav.push<RDSView>();
 			if (viewid == CloseCall) nav.push<CloseCallView>();
 			if (viewid == Receiver) nav.push<ReceiverMenuView>();

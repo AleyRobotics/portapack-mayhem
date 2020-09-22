@@ -26,6 +26,7 @@
 #include "ui_font_fixed_8x16.hpp"
 #include "freqman.hpp"
 #include "analog_audio_app.hpp"
+#include "analog_audio_app_rx_tx.hpp"
 #include "audio.hpp"
 #include "ui_mictx.hpp"
 #include "portapack_persistent_memory.hpp"
