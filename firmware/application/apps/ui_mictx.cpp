@@ -144,7 +144,12 @@ void MicTXView::rxaudio(bool is_on) {
 		audio::input::stop();
 		baseband::shutdown();
 		baseband::run_image(portapack::spi_flash::image_tag_nfm_audio);
-		receiver_model.set_modulation(ReceiverModel::Mode::NarrowbandFMAudio);
+        if (rxtx_mode == 0) {//FM mode
+            receiver_model.set_modulation(ReceiverModel::Mode::NarrowbandFMAudio);
+        }
+        if (rxtx_mode == 1) {//AM mode
+            receiver_model.set_modulation(ReceiverModel::Mode::AMAudio);
+        }
 		receiver_model.set_sampling_rate(3072000);
 		receiver_model.set_baseband_bandwidth(1750000);	
 //		receiver_model.set_tuning_frequency(field_frequency.value()); //probably this too can be commented out.
@@ -178,6 +183,16 @@ void MicTXView::set_ptt_visibility(bool v) {
 	tx_button.hidden(!v);
 }
 
+void MicTXView::set_mode(int32_t v) {
+    rxtx_mode = v;
+    if (rxtx_mode == 0) {//FM mode
+        receiver_model.set_modulation(ReceiverModel::Mode::NarrowbandFMAudio);
+    }
+    if (rxtx_mode == 1) {//AM mode
+        receiver_model.set_modulation(ReceiverModel::Mode::AMAudio);
+    }
+}
+
 MicTXView::MicTXView(
 	NavigationView& nav
 )
@@ -208,6 +223,7 @@ MicTXView::MicTXView(
 		&field_rxlna,
 		&field_rxvga,
 		&field_rxamp,
+        &options_mode,
 		&tx_button
 	});
 
@@ -410,6 +426,7 @@ MicTXView::MicTXView(
 	audio::set_rate(audio::Rate::Hz_24000);
 	audio::input::start();
 }
+
 
 MicTXView::~MicTXView() {
 	audio::input::stop();

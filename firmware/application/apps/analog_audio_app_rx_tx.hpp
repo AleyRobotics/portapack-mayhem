@@ -35,7 +35,7 @@
 
 namespace ui {
 
-constexpr Style style_options_group {
+constexpr Style style_options_rxtx_group {
 	.font = font::fixed_8x16,
 	.background = Color::blue(),
 	.foreground = Color::white(),
@@ -68,9 +68,9 @@ private:
     
 };
 
-class NBFMOptionsView : public View {
+class NBFMRXTXOptionsView : public View {
 public:
-	NBFMOptionsView(const Rect parent_rect, const Style* const style);
+	NBFMRXTXOptionsView(const Rect parent_rect, const Style* const style);
 
 private:
 	Text label_config {
@@ -86,7 +86,7 @@ private:
 			{ "16k ", 0 },
 		}
 	};
-	
+
 	Text text_squelch {
 		{ 9 * 8, 0 * 16, 8 * 8, 1 * 16 },
 		"SQ   /99"

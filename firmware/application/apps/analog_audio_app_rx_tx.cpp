@@ -38,9 +38,9 @@ using namespace tonekey;
 
 namespace ui {
 
-/* AMOptionsView *********************************************************/
+/* AMRXTXOptionsView *********************************************************/
 
-AMOptionsView::AMOptionsView(
+AMRXTXOptionsView::AMRXTXOptionsView(
 	const Rect parent_rect, const Style* const style
 ) : View { parent_rect }
 {
@@ -57,9 +57,9 @@ AMOptionsView::AMOptionsView(
 	};
 }
 
-/* NBFMOptionsView *******************************************************/
+/* NBFMRXTXOptionsView *******************************************************/
 
-NBFMOptionsView::NBFMOptionsView(
+NBFMRXTXOptionsView::NBFMRXTXOptionsView(
 	const Rect parent_rect, const Style* const style
 ) : View { parent_rect }
 {
@@ -270,13 +270,13 @@ void AnalogRXTXAudioView::set_options_widget(std::unique_ptr<Widget> new_widget)
 		options_widget = std::move(new_widget);
 	} else {
 		// TODO: Lame hack to hide options view due to my bad paint/damage algorithm.
-		options_widget = std::make_unique<Rectangle>(options_view_rect, style_options_group.background);
+		options_widget = std::make_unique<Rectangle>(options_view_rect, style_options_rxtx_group.background);
 	}
 	add_child(options_widget.get());
 }
 
 void AnalogRXTXAudioView::on_show_options_frequency() {
-	auto widget = std::make_unique<FrequencyOptionsView>(options_view_rect, &style_options_group);
+	auto widget = std::make_unique<FrequencyOptionsView>(options_view_rect, &style_options_rxtx_group);
 
 	widget->set_step(receiver_model.frequency_step());
 	widget->on_change_step = [this](rf::Frequency f) {
@@ -288,14 +288,14 @@ void AnalogRXTXAudioView::on_show_options_frequency() {
 	};
 
 	set_options_widget(std::move(widget));
-	field_frequency.set_style(&style_options_group);
+	field_frequency.set_style(&style_options_rxtx_group);
 }
 
 void AnalogRXTXAudioView::on_show_options_rf_gain() {
-	auto widget = std::make_unique<RadioGainOptionsView>(options_view_rect, &style_options_group);
+	auto widget = std::make_unique<RadioGainOptionsView>(options_view_rect, &style_options_rxtx_group);
 
 	set_options_widget(std::move(widget));
-	field_lna.set_style(&style_options_group);
+	field_lna.set_style(&style_options_rxtx_group);
 }
 
 void AnalogRXTXAudioView::on_show_options_modulation() {
@@ -304,13 +304,13 @@ void AnalogRXTXAudioView::on_show_options_modulation() {
 	const auto modulation = static_cast<ReceiverModel::Mode>(receiver_model.modulation());
 	switch(modulation) {
 	case ReceiverModel::Mode::AMAudio:
-		widget = std::make_unique<AMOptionsView>(options_view_rect, &style_options_group);
+		widget = std::make_unique<AMRXTXOptionsView>(options_view_rect, &style_options_rxtx_group);
 		waterfall.show_audio_spectrum_view(false);
 		text_ctcss.hidden(true);
 		break;
 
 	case ReceiverModel::Mode::NarrowbandFMAudio:
-		widget = std::make_unique<NBFMOptionsView>(nbfm_view_rect, &style_options_group);
+		widget = std::make_unique<NBFMRXTXOptionsView>(nbfm_view_rect, &style_options_rxtx_group);
 		waterfall.show_audio_spectrum_view(false);
 		text_ctcss.hidden(false);
 		break;
@@ -321,7 +321,7 @@ void AnalogRXTXAudioView::on_show_options_modulation() {
 		break;
 	
 	case ReceiverModel::Mode::SpectrumAnalysis:
-		widget = std::make_unique<SPECRXTXOptionsView>(this, nbfm_view_rect, &style_options_group);
+		widget = std::make_unique<SPECRXTXOptionsView>(this, nbfm_view_rect, &style_options_rxtx_group);
 		waterfall.show_audio_spectrum_view(false);
 		text_ctcss.hidden(true);
 		break;
@@ -331,7 +331,7 @@ void AnalogRXTXAudioView::on_show_options_modulation() {
 	}
 
 	set_options_widget(std::move(widget));
-	options_modulation.set_style(&style_options_group);
+	options_modulation.set_style(&style_options_rxtx_group);
 }
 
 void AnalogRXTXAudioView::on_frequency_step_changed(rf::Frequency f) {

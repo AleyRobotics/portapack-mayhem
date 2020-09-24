@@ -75,6 +75,8 @@ private:
 	void on_headphone_volume_changed(int32_t v);
 
 	void set_ptt_visibility(bool v);
+    
+    void set_mode(int32_t);
 	
 	bool transmitting { false };
 	bool va_enabled { false };
@@ -99,6 +101,7 @@ private:
 	int32_t focused_ui { 2 };
 	bool button_touch { false };
 
+    int32_t rxtx_mode { 0 }; //FM
 	
 	Labels labels {
 		{ { 3 * 8, 1 * 8 }, "MIC. GAIN:", Color::light_grey() },
@@ -116,7 +119,8 @@ private:
 		{ { 5 * 8, 25 * 8 }, "F:", Color::light_grey() },
 		{ { 5 * 8, 27 * 8 }, "LNA:", Color::light_grey()},
 		{ {12 * 8, 27 * 8 }, "VGA:", Color::light_grey()},
-		{ {19 * 8, 27 * 8 }, "AMP:", Color::light_grey()}
+		{ {19 * 8, 27 * 8 }, "AMP:", Color::light_grey()},
+        { {19 * 8, 28 * 8 }, "MODE:", Color::light_grey()} //am/FM
 	};
 	
 	VuMeter vumeter {
@@ -266,6 +270,17 @@ private:
 		1,
 		' ',
 	};
+    
+    OptionsField options_mode {//{19 * 8, 28 * 8 },
+        { 12 * 8, 27 * 8 },
+        4,
+        {
+            { "FM", 0 },
+            { "AM", 1 }//,
+//            { "LSB", 2 },
+//            { "USB", 3 }
+        }
+    };
 
 	Button tx_button {
 		{ 10 * 8, 30 * 8, 10 * 8, 5 * 8 },
