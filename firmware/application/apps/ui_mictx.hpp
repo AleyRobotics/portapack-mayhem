@@ -101,7 +101,7 @@ private:
 	int32_t focused_ui { 2 };
 	bool button_touch { false };
 
-    int32_t rxtx_mode { 0 }; //FM
+    int32_t rxtx_mode { 1 }; //AM
 	
 	Labels labels {
 		{ { 3 * 8, 1 * 8 }, "MIC. GAIN:", Color::light_grey() },
@@ -120,7 +120,7 @@ private:
 		{ { 5 * 8, 27 * 8 }, "LNA:", Color::light_grey()},
 		{ {12 * 8, 27 * 8 }, "VGA:", Color::light_grey()},
 		{ {19 * 8, 27 * 8 }, "AMP:", Color::light_grey()},
-        { {19 * 8, 28 * 8 }, "MODE:", Color::light_grey()} //am/FM
+        { {4 * 8, 29 * 8 }, "MODE:", Color::light_grey()} //am/FM
 	};
 	
 	VuMeter vumeter {
@@ -272,7 +272,7 @@ private:
 	};
     
     OptionsField options_mode {//{19 * 8, 28 * 8 },
-        { 12 * 8, 27 * 8 },
+        { 10 * 8, 29 * 8 },
         4,
         {
             { "FM", 0 },
@@ -283,7 +283,7 @@ private:
     };
 
 	Button tx_button {
-		{ 10 * 8, 30 * 8, 10 * 8, 5 * 8 },
+		{ 18 * 8, 30 * 8, 10 * 8, 5 * 8 },
 		"TX",
 		true
 	};
